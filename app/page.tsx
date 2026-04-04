@@ -177,7 +177,7 @@ const sectionViewport = { once: true, margin: '-120px' };
 const sectionReveal = {
   initial: { opacity: 0, y: 56 },
   whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+  transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as any },
   viewport: sectionViewport,
 };
 
@@ -196,7 +196,7 @@ const staggerItem = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as any },
   },
 };
 

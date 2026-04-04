@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-/* 🔥 Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
-
 /* 🔥 Root Variables */
 :root {
   --background: #ffffff;
@@ -40,4 +37,38 @@ body {
 /* 🔥 Headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+}
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) { .container { max-width: 640px; } }
+@media (min-width: 768px) { .container { max-width: 768px; } }
+@media (min-width: 1024px) { .container { max-width: 1024px; } }
+@media (min-width: 1280px) { .container { max-width: 1280px; } }
+@media (min-width: 1536px) { .container { max-width: 1536px; } }
+
+.section-padding {
+  padding: 5rem 1.5rem;
+}
+
+.container-wide {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-inline: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-block: 6rem;
+    padding-inline: 6rem;
+  }
 }
