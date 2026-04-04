@@ -175,9 +175,12 @@ const Navbar = () => {
 const sectionViewport = { once: true, margin: '-120px' };
 
 const sectionReveal = {
-  initial: { opacity: 0, y: 56 },
-  whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as any },
+  initial: { opacity: 0, y: 30 },
+  whileInView: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any } 
+  },
   viewport: sectionViewport,
 };
 
@@ -186,18 +189,49 @@ const staggerGrid = {
   whileInView: {
     transition: {
       staggerChildren: 0.12,
+      delayChildren: 0.1,
     },
   },
 };
 
 const staggerItem = {
-  initial: { opacity: 0, y: 40, scale: 0.97 },
+  initial: { opacity: 0, y: 20, scale: 0.98 },
   whileInView: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] as any },
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any },
   },
+};
+
+const staggerContainer = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    }
+  },
+  whileInView: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    }
+  },
+};
+
+const revealItem = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any }
+  },
+  whileInView: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as any }
+  }
 };
 
 const CountUp = ({
@@ -276,7 +310,12 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      <div className="relative mx-auto flex min-h-[820px] max-w-[1680px] flex-col justify-between overflow-hidden rounded-[2rem] px-7 pb-12 pt-8 md:min-h-[860px] md:px-12 md:pb-16 md:pt-12">
+      <motion.div 
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+        className="relative mx-auto flex min-h-[820px] max-w-[1680px] flex-col justify-between overflow-hidden rounded-[2rem] px-7 pb-12 pt-8 md:min-h-[860px] md:px-12 md:pb-16 md:pt-12"
+      >
         <div className="flex justify-end">
           <div className="hidden rounded-full border border-white/20 bg-[#f5f5f5]/8 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/70 backdrop-blur-md md:block">
             Creative studio and motion-first web systems
@@ -298,7 +337,7 @@ const Hero = () => {
                 Studio
               </span>
             </div>
-          </motion.div>
+            </motion.div>
           </div>
 
           <motion.div 
@@ -307,46 +346,47 @@ const Hero = () => {
             transition={{ delay: 1.2, duration: 0.8, type: "spring" }}
             className="self-end"
           >
-            <div className="w-full max-w-[420px] rounded-[1.6rem] bg-[#f5f5f5] p-3 text-black shadow-[0_18px_60px_rgba(15,23,42,0.18)]">
-              <div className="flex items-center gap-4 rounded-[1.25rem] bg-[#f5f5f5] p-2.5">
-                <div className="relative">
+            <div className="w-full max-w-[340px] rounded-[2rem] bg-white p-6 shadow-[0_24px_80px_rgba(0,0,0,0.12)]">
+              <div className="flex items-center gap-5">
+                <div className="shrink-0">
                   <img 
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Head of Idea" 
-                    className="h-28 w-28 rounded-[1rem] object-cover"
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" 
+                    alt="Almond D. Nelsi" 
+                    className="h-24 w-24 rounded-2xl object-cover"
                     referrerPolicy="no-referrer"
                   />
                 </div>
-                <div className="flex min-w-0 flex-1 flex-col justify-between self-stretch py-2">
-                  <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8b8b8b]">Head of idea</p>
-                    <p className="mt-1 font-display text-[1.75rem] font-bold leading-none tracking-[-0.05em] text-black">
-                      Almond D. Nelsi
-                    </p>
-                  </div>
-                  <div className="mt-5 flex items-center gap-3">
+                <div className="flex flex-col justify-center">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#A3B1C2]">Head of idea</p>
+                  <p className="mt-0.5 text-xl font-bold leading-tight tracking-tight text-black">
+                    Almond D. Nelsi
+                  </p>
+                  <div className="mt-4 flex items-center gap-3">
                     <motion.button 
-                      whileHover={{ rotate: 90 }}
-                      className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-white"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white"
                     >
-                      <Plus size={18} />
+                      <Plus size={14} strokeWidth={3} />
                     </motion.button>
-                    <a href="#contact" className="text-sm font-semibold uppercase tracking-[0.16em] text-black">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-black">
                       Let&apos;s talk
-                    </a>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
-            <p className="mt-5 max-w-[420px] text-[0.95rem] font-semibold leading-8 text-white">
-              No cookie-cutter websites. No fluff.
-            </p>
-            <p className="mt-1 max-w-[420px] text-[0.95rem] leading-8 text-white/58">
-              Just real tools and smart strategies to grow your business and elevate your brand.
-            </p>
+            <div className="mt-8 space-y-2">
+              <p className="text-[1.125rem] font-bold leading-tight text-white">
+                No cookie-cutter websites. No fluff.
+              </p>
+              <p className="max-w-[320px] text-[0.95rem] leading-snug text-white/40">
+                Just real tools and smart strategies to grow your business and elevate your brand.
+              </p>
+            </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       <motion.div 
         initial={{ opacity: 0 }}
@@ -416,7 +456,10 @@ const Intro = () => {
         </div>
 
         <div className="grid gap-4 lg:grid-cols-[230px_minmax(0,1fr)_230px]">
-          <div className="rounded-[1.9rem] border border-black/6 bg-[#f5f5f5] p-5 shadow-[0_20px_60px_rgba(15,23,42,0.05)]">
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="rounded-[1.9rem] border border-black/6 bg-[#f5f5f5] p-5 shadow-[0_20px_60px_rgba(15,23,42,0.05)]"
+          >
             <div className="mb-6 flex items-start justify-between gap-3 border-b border-black/8 pb-5">
               <div>
                 <div className="flex items-start">
@@ -435,8 +478,9 @@ const Intro = () => {
             <div className="mt-10">
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
-                  <img
+                  <motion.img
                     key={i}
+                    whileHover={{ y: -5, zIndex: 10 }}
                     src={`https://i.pravatar.cc/120?u=intro-${i}`}
                     alt="User"
                     className="h-11 w-11 rounded-full border-2 border-white object-cover"
@@ -446,9 +490,12 @@ const Intro = () => {
               </div>
               <p className="mt-4 text-sm font-medium text-black">1200+ happy users review</p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative overflow-hidden rounded-[1.9rem] bg-[#0b0b0b] shadow-[0_24px_60px_rgba(15,23,42,0.14)] md:min-h-[430px]">
+          <motion.div 
+            whileHover={{ scale: 0.99 }}
+            className="relative overflow-hidden rounded-[1.9rem] bg-[#0b0b0b] shadow-[0_24px_60px_rgba(15,23,42,0.14)] md:min-h-[430px]"
+          >
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(255,255,255,0.05),transparent_34%)]" />
             <div className="absolute right-10 top-9 hidden text-right text-white md:block">
               <div className="space-y-7">
@@ -487,7 +534,7 @@ const Intro = () => {
                 Merizo H. Yelso <span className="font-normal text-white/42">/CEO</span>
               </p>
             </div>
-          </div>
+          </motion.div>
 
           <div className="flex flex-col gap-4">
             <div className="rounded-[1.9rem] border border-black/6 bg-[#f5f5f5] p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)]">
@@ -555,7 +602,13 @@ const Intro = () => {
 };
 const About = () => {
   return (
-    <section className="section-padding bg-[#f5f5f5]">
+    <motion.section 
+      variants={sectionReveal}
+      initial="initial"
+      whileInView="whileInView"
+      viewport={{ once: true }}
+      className="section-padding bg-[#f5f5f5]"
+    >
       <div className="container-wide grid lg:grid-cols-12 gap-12">
         <div className="lg:col-span-3">
           <div className="mb-12">
@@ -635,7 +688,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
@@ -649,7 +702,14 @@ const Portfolio = () => {
   ];
 
   return (
-    <motion.section id="portfolio" className="section-padding bg-[#f5f5f5] overflow-hidden" {...sectionReveal}>
+    <motion.section 
+      id="portfolio" 
+      variants={sectionReveal}
+      initial="initial"
+      whileInView="whileInView"
+      viewport={{ once: true }}
+      className="section-padding bg-[#f5f5f5] overflow-hidden"
+    >
       <div className="container-wide">
         <SectionHeading 
           subtitle="Portfolio" 
@@ -763,8 +823,11 @@ const Expertise = () => {
   return (
     <motion.section
       id="expertise"
+      variants={sectionReveal}
+      initial="initial"
+      whileInView="whileInView"
+      viewport={{ once: true }}
       className="relative bg-black bg-fixed text-white overflow-hidden"
-      {...sectionReveal}
     >
       <div className="container-wide relative w-full px-6 py-20 md:px-12 md:py-24 lg:px-24">
         <div className="text-center mb-20 md:mb-24">
