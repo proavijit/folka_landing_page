@@ -1,68 +1,43 @@
 @import "tailwindcss";
 
+/* 🔥 Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* 🔥 Root Variables */
 :root {
   --background: #ffffff;
-  --foreground: #000000;
-  --color-primary: #000000;
-  --color-secondary: #666666;
-  --color-accent: #f3f4f6;
+  --foreground: #171717;
+
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Funnel Display', sans-serif;
 }
 
+/* 🔥 Tailwind mapping */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--color-primary);
-  --color-secondary: var(--color-secondary);
-  --color-accent: var(--color-accent);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-heading);
+
+  --font-body: var(--font-body);
+  --font-heading: var(--font-heading);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* 🔥 Base */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-body);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading), sans-serif;
-  letter-spacing: -0.04em;
+/* 🔥 Typography */
+.font-body {
+  font-family: var(--font-body);
 }
 
-.glass {
-  background: rgb(255 255 255 / 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgb(255 255 255 / 0.2);
+.font-heading {
+  font-family: var(--font-heading);
 }
 
-.section-padding {
-  padding: 5rem 1.5rem;
-}
-
-.container-wide {
-  width: 100%;
-  max-width: 80rem;
-  margin-inline: auto;
-}
-
-@media (min-width: 768px) {
-  .section-padding {
-    padding-inline: 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-padding {
-    padding-block: 6rem;
-    padding-inline: 6rem;
-  }
+/* 🔥 Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }
