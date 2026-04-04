@@ -11,7 +11,8 @@ import {
   X, 
   ChevronRight,
   Phone,
-  MapPin
+  MapPin,
+  Trophy
 } from 'lucide-react';
 import { cn } from './lib/utils';
 
@@ -863,74 +864,142 @@ const Expertise = () => {
 const FunFacts = () => {
   return (
     <motion.section className="section-padding bg-white" {...sectionReveal}>
-      <div className="container-wide grid lg:grid-cols-2 gap-20 items-center">
-        <div className="relative">
-          <div className="grid grid-cols-2 gap-4">
-            <img 
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" 
-              alt="Team" 
-              className="rounded-3xl h-64 w-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-            <img 
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" 
-              alt="Meeting" 
-              className="rounded-3xl h-80 w-full object-cover -mt-16"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-        </div>
-
-        <div>
-          <p className="text-xs uppercase tracking-widest text-secondary mb-4">Fun Facts</p>
-          <h2 className="text-4xl md:text-5xl font-medium mb-12 leading-tight">
-            Consistently delivering impactful results through a perfect blend of design and functionality.
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-accent/30 p-8 rounded-3xl">
-              <div className="flex justify-between items-start mb-8">
-                <p className="text-sm font-medium max-w-[100px]">Successful projects completed</p>
-                <span className="text-5xl font-bold">2k</span>
+      <div className="container-wide">
+        <div className="grid items-start gap-12 lg:grid-cols-[320px_minmax(0,1fr)] xl:grid-cols-[360px_minmax(0,1fr)] xl:gap-18">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto w-full max-w-[360px]"
+          >
+            <motion.div
+              whileHover={{ y: -8, rotate: -1 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="relative overflow-hidden rounded-[1.2rem] shadow-[0_24px_60px_rgba(15,23,42,0.1)]"
+            >
+              <div className="pointer-events-none absolute inset-x-8 bottom-0 h-20 rounded-full bg-black/10 blur-3xl" />
+              <div className="pointer-events-none absolute right-4 top-4 rounded-full border border-white/50 bg-white/55 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-black/65 backdrop-blur-md">
+                Real stories
               </div>
-              <div className="relative rounded-2xl overflow-hidden h-40">
-                <img 
-                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Project" 
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                    <Play size={16} fill="black" />
+              <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop"
+                alt="Fun facts team"
+                className="h-[430px] w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                referrerPolicy="no-referrer"
+              />
+            </motion.div>
+          </motion.div>
+
+          <div className="max-w-[760px]">
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="mb-4 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-secondary"
+            >
+              Fun facts
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-[620px] text-4xl font-medium leading-[1.15] tracking-[-0.05em] text-black md:text-[3.4rem]"
+            >
+              Consistently delivering impactful results through a perfect blend of design and functionality.
+            </motion.h2>
+
+            <motion.div
+              className="mt-10 grid gap-4 md:grid-cols-[1.05fr_0.95fr]"
+              variants={staggerGrid}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true, margin: "-80px" }}
+            >
+              <motion.div variants={staggerItem} className="space-y-4">
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="flex items-end justify-between rounded-[1rem] border border-black/5 bg-[linear-gradient(180deg,#fffdf8_0%,#f7f3eb_100%)] px-5 py-5"
+                >
+                  <p className="max-w-[130px] text-[0.82rem] leading-5 text-secondary">
+                    Successful projects completed
+                  </p>
+                  <p className="text-[2.6rem] font-medium tracking-[-0.06em] text-black">
+                    2k<span className="text-black/20">+</span>
+                  </p>
+                </motion.div>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="relative overflow-hidden rounded-[1rem] bg-black p-5 text-white shadow-[0_24px_60px_rgba(15,23,42,0.14)]"
+                >
+                  <div className="pointer-events-none absolute inset-x-10 bottom-0 h-16 rounded-full bg-white/10 blur-2xl" />
+                  <div className="relative flex gap-3">
+                    <img
+                      src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop"
+                      alt="Project detail one"
+                      className="h-16 w-18 rounded-[0.8rem] object-cover -rotate-12 shadow-lg"
+                      referrerPolicy="no-referrer"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop"
+                      alt="Project detail two"
+                      className="h-16 w-18 rounded-[0.8rem] object-cover rotate-6 shadow-lg"
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
-                </div>
-              </div>
-              <p className="mt-6 text-sm text-secondary">
-                More than 2k+ projects completed—each crafted to deliver real-world results for ambitious brands.
-              </p>
-            </div>
+                  <p className="relative mt-10 max-w-[270px] text-sm leading-7 text-white/75">
+                    More than 2k+ projects completed, each crafted to deliver real-world results for ambitious brands.
+                  </p>
+                </motion.div>
+              </motion.div>
 
-            <div className="bg-accent/30 p-8 rounded-3xl flex flex-col justify-between">
-              <div>
-                <div className="flex gap-1 mb-2">
-                  {[1, 2, 3, 4, 5].map((i) => <div key={i} className="w-4 h-4 bg-orange-400 rounded-full" />)}
-                </div>
-                <h4 className="text-5xl font-bold mb-2">4.9/5</h4>
-                <p className="text-sm text-secondary">We offer end-to-end creative solutions that make brands unforgettable.</p>
-              </div>
-              
-              <div className="mt-8 space-y-4">
-                <button className="w-full bg-white py-4 rounded-full text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-                  <div className="w-2 h-2 bg-black rounded-full" />
-                  Hire us now
-                </button>
-                <div className="bg-black text-white p-6 rounded-2xl flex justify-between items-center">
-                  <p className="text-xs font-medium">Worldwide base around the world</p>
-                  <span className="text-2xl font-bold">5+</span>
-                </div>
-              </div>
-            </div>
+              <motion.div variants={staggerItem} className="space-y-4">
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="rounded-[1rem] border border-black/5 bg-[linear-gradient(180deg,#fffdf8_0%,#f7f3eb_100%)] p-5"
+                >
+                  <div className="mb-3 flex gap-1.5">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <div key={i} className="h-2.5 w-2.5 rounded-full bg-orange-400 shadow-[0_0_14px_rgba(251,146,60,0.28)]" />
+                    ))}
+                  </div>
+                  <h4 className="text-[3.4rem] font-medium leading-none tracking-[-0.07em] text-black">4.9/5</h4>
+                  <div className="my-6 h-px bg-black/10" />
+                  <p className="max-w-[220px] text-sm leading-7 text-secondary">
+                    We offer end-to-end creative solutions that make brands unforgettable.
+                  </p>
+                  <motion.button
+                    whileHover={{ x: 4 }}
+                    className="mt-8 flex items-center gap-3 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-black"
+                  >
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white transition-transform duration-300">
+                      <Plus size={14} />
+                    </span>
+                    Hire us now
+                  </motion.button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="relative overflow-hidden rounded-[1rem] bg-black text-white"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=900&auto=format&fit=crop"
+                    alt="Worldwide base"
+                    className="h-[84px] w-full object-cover opacity-45"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/55 to-black/20" />
+                  <div className="absolute inset-0 flex items-end justify-between px-4 py-3">
+                    <p className="max-w-[130px] text-[0.72rem] font-medium leading-5 text-white/90">
+                      Worldwide base around the world
+                    </p>
+                    <span className="text-[2rem] font-medium tracking-[-0.05em]">5+</span>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -939,19 +1008,55 @@ const FunFacts = () => {
 };
 
 const Logos = () => {
+  const logoItems = [
+    { name: 'Logoipsum', color: 'bg-blue-600' },
+    { name: 'Logoipsum', color: 'bg-lime-500' },
+    { name: 'Logoipsum', color: 'bg-violet-500' },
+    { name: 'Logoipsum', color: 'bg-sky-500' },
+    { name: 'logoipsum', color: 'bg-lime-400' },
+    { name: 'Logoipsum', color: 'bg-pink-600' },
+    { name: 'Logoipsum', color: 'bg-red-500' },
+    { name: 'Next can be you', color: 'bg-black' },
+  ];
+
   return (
     <motion.section className="py-20 bg-white border-y border-accent" {...sectionReveal}>
       <div className="container-wide">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-center opacity-40 grayscale">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <div key={i} className="flex justify-center">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-black rounded-sm rotate-45" />
-                <span className="font-display font-bold text-lg">LOGOIPSUM</span>
-              </div>
-            </div>
-          ))}
+        <div className="mb-5 flex items-center justify-between text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-black/55">
+          <span>Happy users</span>
+          <span>©2025 CaseThemes studio</span>
         </div>
+
+        <motion.div
+          className="overflow-hidden rounded-[1.1rem] border border-black/6 bg-white"
+          variants={staggerGrid}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {logoItems.map((item, i) => (
+              <motion.div
+                key={`${item.name}-${i}`}
+                variants={staggerItem}
+                whileHover={{ y: -2, backgroundColor: 'rgba(249,246,239,0.9)' }}
+                className="group flex min-h-[100px] items-center justify-center border-b border-r border-black/6 px-6 py-8 text-center last:border-r-0 md:min-h-[108px]"
+              >
+                {i === 7 ? (
+                  <div className="space-y-2 text-[0.64rem] font-semibold uppercase tracking-[0.12em] text-black/60">
+                    <p>Next can be you</p>
+                    <p className="text-black">Let&apos;s talk</p>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2.5 transition-transform duration-300 group-hover:scale-105">
+                    <span className={cn("h-4 w-4 rounded-[4px] rotate-12", item.color)} />
+                    <span className="font-display text-lg font-bold text-black">{item.name}</span>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </motion.section>
   );
@@ -959,20 +1064,72 @@ const Logos = () => {
 
 const VideoSection = () => {
   return (
-    <motion.section className="relative h-[600px] w-full overflow-hidden" {...sectionReveal}>
-      <img 
-        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
-        alt="Video BG" 
-        className="w-full h-full object-cover"
-        referrerPolicy="no-referrer"
-      />
-      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-        <button className="flex flex-col items-center gap-4 group">
-          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center transition-transform group-hover:scale-110">
-            <Play size={32} fill="black" />
-          </div>
-          <span className="text-white font-bold uppercase tracking-widest text-xs">Play Reel</span>
-        </button>
+    <motion.section className="bg-white pb-16" {...sectionReveal}>
+      <div className="container-wide">
+        <motion.div
+          whileHover="hover"
+          initial="rest"
+          animate="rest"
+          className="group relative overflow-hidden rounded-[1.2rem]"
+        >
+          <motion.img
+            variants={{
+              rest: { scale: 1, filter: 'blur(0px)' },
+              hover: { scale: 1.04, filter: 'blur(3px)' },
+            }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1800&auto=format&fit=crop"
+            alt="Video BG"
+            className="h-[560px] w-full object-cover"
+            referrerPolicy="no-referrer"
+          />
+          <motion.div
+            variants={{
+              rest: { backgroundColor: 'rgba(0,0,0,0.18)' },
+              hover: { backgroundColor: 'rgba(0,0,0,0.32)' },
+            }}
+            transition={{ duration: 0.35 }}
+            className="absolute inset-0"
+          />
+          <motion.button
+            variants={{
+              rest: {
+                scale: 1,
+                left: '1.5rem',
+                top: 'calc(100% - 1.5rem)',
+                x: '0%',
+                y: '-100%',
+              },
+              hover: {
+                scale: 1.06,
+                left: '50%',
+                top: '50%',
+                x: '-50%',
+                y: '-50%',
+              },
+            }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute flex items-center gap-3 rounded-full bg-white px-4 py-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-black shadow-[0_12px_30px_rgba(15,23,42,0.16)]"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white">
+              <Play size={14} fill="currentColor" />
+            </span>
+            Play reel
+          </motion.button>
+
+          <motion.div
+            variants={{
+              rest: { opacity: 0, scale: 0.94 },
+              hover: { opacity: 1, scale: 1 },
+            }}
+            transition={{ duration: 0.35 }}
+            className="pointer-events-none absolute inset-0 flex items-center justify-center"
+          >
+            <div className="rounded-full border border-white/40 bg-white/10 p-4 backdrop-blur-md">
+              <div className="h-3 w-3 rounded-full border border-black/40" />
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </motion.section>
   );
@@ -994,8 +1151,16 @@ const Testimonials = () => {
             title="Accelerating growth, and unlocking new potential. Let's build your brand—together."
             className="mb-0"
           />
-          <div className="flex -space-x-2">
-            {[1, 2, 3].map(i => <img key={i} src={`https://i.pravatar.cc/150?u=${i+10}`} className="w-10 h-10 rounded-full border-2 border-white" />)}
+          <div className="flex -space-x-3 rounded-full border border-black/10 bg-white/75 px-3 py-2 shadow-[0_16px_40px_rgba(15,23,42,0.08)] backdrop-blur-sm">
+            {[1, 2, 3].map((i) => (
+              <motion.img
+                key={i}
+                src={`https://i.pravatar.cc/150?u=${i + 10}`}
+                className="h-10 w-10 rounded-full border-2 border-white object-cover"
+                whileHover={{ y: -3, scale: 1.05 }}
+                transition={{ duration: 0.25 }}
+              />
+            ))}
           </div>
         </div>
 
@@ -1005,22 +1170,30 @@ const Testimonials = () => {
               key={i} 
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
+              whileHover={{ y: -10, scale: 1.015 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.2 }}
-              className="bg-white p-8 rounded-3xl shadow-sm flex flex-col justify-between hover:shadow-xl transition-shadow duration-500"
+              className="group relative flex min-h-[280px] flex-col gap-6 overflow-hidden rounded-[2rem] border border-black/5 bg-white p-8 shadow-[0_18px_45px_rgba(15,23,42,0.08)] transition-all duration-500 hover:border-transparent hover:shadow-[0_30px_70px_rgba(15,23,42,0.18)]"
             >
-              <div>
+              <div className="absolute inset-0 z-0 translate-y-[-102%] bg-black transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0" />
+              <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-black/12 to-transparent transition-colors duration-500 group-hover:via-white/20" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_38%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="relative z-10">
                 <div className="flex gap-1 mb-6">
-                  {[...Array(t.rating)].map((_, i) => <div key={i} className="w-3 h-3 bg-orange-400 rounded-full" />)}
+                  {[...Array(t.rating)].map((_, i) => (
+                    <div key={i} className="w-3 h-3 bg-orange-400 rounded-full transition-transform duration-300 group-hover:scale-110" />
+                  ))}
                 </div>
-                <p className="text-lg mb-8 leading-relaxed italic">"{t.text}"</p>
+                <p className="text-lg mb-8 leading-relaxed text-black/80 transition-colors duration-500 group-hover:text-white/92">
+                  &quot;{t.text}&quot;
+                </p>
               </div>
-              <div className="flex justify-between items-end">
+              <div className="relative z-10 mt-auto flex justify-between items-end">
                 <div>
-                  <p className="font-bold">{t.name}</p>
-                  <p className="text-xs text-secondary">{t.role}</p>
+                  <p className="font-bold text-black transition-colors duration-500 group-hover:text-white">{t.name}</p>
+                  <p className="text-xs text-secondary transition-colors duration-500 group-hover:text-white/55">{t.role}</p>
                 </div>
-                <p className="text-[10px] uppercase tracking-widest text-secondary font-bold">Great Design Solutions</p>
+                <p className="text-[10px] uppercase tracking-widest text-secondary font-bold transition-colors duration-500 group-hover:text-white/35">Great Design Solutions</p>
               </div>
             </motion.div>
           ))}
@@ -1032,81 +1205,98 @@ const Testimonials = () => {
 
 const Contact = () => {
   return (
-    <motion.section id="contact" className="section-padding bg-black text-white overflow-hidden" {...sectionReveal}>
-      <div className="container-wide grid lg:grid-cols-2 gap-20">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <p className="text-xs uppercase tracking-widest text-white/50 mb-4">Get in touch</p>
-          <h2 className="text-4xl md:text-6xl font-medium mb-12 leading-tight">
-            Tell us about your project—whether it's a website, SEO, or marketing.
-          </h2>
-          
-          <div className="space-y-12">
-            <div className="flex gap-6">
-              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
-                <Phone size={20} />
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-white/50 mb-1">Talk to us</p>
-                <p className="font-bold">Work and general inquiries</p>
-                <p className="text-white/70">+1 23 456 789 00</p>
-              </div>
-            </div>
-            <div className="flex gap-6">
-              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
-                <MapPin size={20} />
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-white/50 mb-1">Post Address</p>
-                <p className="font-bold">541 Melville Ave, Palo Alto, CA</p>
-                <p className="text-white/70">94301, United States</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-white text-black p-10 rounded-[3rem] shadow-2xl"
-        >
-          <h3 className="text-2xl font-bold mb-8">Have a project in mind?</h3>
-          <form className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <input type="text" placeholder="Your Name" className="w-full border-b border-accent py-4 outline-none focus:border-black transition-colors" />
-              <input type="email" placeholder="Business Email" className="w-full border-b border-accent py-4 outline-none focus:border-black transition-colors" />
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-              <select className="w-full border-b border-accent py-4 outline-none focus:border-black transition-colors bg-transparent">
-                <option>Budget</option>
-                <option>$1000 - $5000</option>
-                <option>$5000+</option>
-              </select>
-              <select className="w-full border-b border-accent py-4 outline-none focus:border-black transition-colors bg-transparent">
-                <option>Service</option>
-                <option>Web Design</option>
-                <option>SEO</option>
-              </select>
-            </div>
-            <textarea placeholder="Message" rows={4} className="w-full border-b border-accent py-4 outline-none focus:border-black transition-colors resize-none" />
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-4 group mt-8"
+    <motion.section id="contact" className="section-padding relative overflow-hidden bg-black text-white" {...sectionReveal}>
+      <div className="pointer-events-none absolute inset-0 opacity-80 [background-image:radial-gradient(rgba(255,255,255,0.11)_0.7px,transparent_0.7px)] [background-size:6px_6px]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_42%,rgba(0,0,0,0.48)_100%)]" />
+      <div className="container-wide relative">
+        <div className="px-2 py-2 md:px-4 md:py-4">
+          <div className="relative grid items-start gap-12 lg:grid-cols-[1.08fr_0.82fr] lg:gap-20">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="lg:pl-10"
             >
-              <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white transition-transform group-hover:scale-110">
-                <ArrowRight size={20} />
+              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45">Get in touch</p>
+              <h2 className="mb-14 max-w-[12.5ch] text-[2.2rem] font-medium leading-[1.02] tracking-[-0.05em] text-white md:text-[3.15rem]">
+                Tell us about your project whether it&apos;s a website, SEO, or marketing.
+              </h2>
+
+              <div className="grid max-w-[30rem] gap-10 text-sm text-white/78 sm:grid-cols-2 sm:gap-12">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/72">
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/20 bg-white/6">
+                      <Phone size={10} />
+                    </span>
+                    Talk to us
+                  </div>
+                  <p className="max-w-[20ch] text-white/62">Work and general inquiries</p>
+                  <p className="font-medium text-white/92">+123 456 789 00</p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/72">
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/20 bg-white/6">
+                      <MapPin size={10} />
+                    </span>
+                    Post address
+                  </div>
+                  <p className="max-w-[24ch] text-white/62">541 Melville Ave, Palo Alto, CA 94301, United States</p>
+                </div>
               </div>
-              <span className="font-bold uppercase tracking-widest text-xs">Let's Talk</span>
-            </motion.button>
-          </form>
-        </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              whileHover={{ y: -6 }}
+              className="w-full max-w-[20rem] justify-self-start rounded-[1.2rem] bg-[#fbfaf8] p-6 text-black shadow-[0_26px_60px_rgba(15,23,42,0.18)] md:mt-2 md:p-7"
+            >
+              <h3 className="mb-6 text-[1.08rem] font-semibold tracking-[-0.03em]">Have a project in mind?</h3>
+              <form className="space-y-4">
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <input type="text" placeholder="YOUR NAME" className="h-10 w-full rounded-md border border-black/5 bg-[#f0eeeb] px-3 text-[9px] font-medium uppercase tracking-[0.08em] text-black placeholder:text-black/35 outline-none transition-all focus:border-black/18 focus:bg-white" />
+                  <input type="email" placeholder="BUSINESS EMAIL" className="h-10 w-full rounded-md border border-black/5 bg-[#f0eeeb] px-3 text-[9px] font-medium uppercase tracking-[0.08em] text-black placeholder:text-black/35 outline-none transition-all focus:border-black/18 focus:bg-white" />
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.14em] text-black/70">Budget</p>
+                    <select className="h-10 w-full rounded-md border border-black/5 bg-[#f0eeeb] px-3 text-[9px] font-medium uppercase tracking-[0.08em] text-black outline-none transition-all focus:border-black/18 focus:bg-white">
+                      <option>$1000 - $5000</option>
+                      <option>$5000 - $10000</option>
+                      <option>$10000+</option>
+                    </select>
+                  </div>
+                  <div>
+                    <p className="mb-2 text-[9px] font-semibold uppercase tracking-[0.14em] text-black/70">Service</p>
+                    <select className="h-10 w-full rounded-md border border-black/5 bg-[#f0eeeb] px-3 text-[9px] font-medium uppercase tracking-[0.08em] text-black outline-none transition-all focus:border-black/18 focus:bg-white">
+                      <option>Consultancy</option>
+                      <option>Web Design</option>
+                      <option>SEO</option>
+                    </select>
+                  </div>
+                </div>
+
+                <textarea placeholder="MESSAGE" rows={4} className="min-h-[5.9rem] w-full resize-none rounded-md border border-black/5 bg-[#f0eeeb] px-3 py-3 text-[9px] font-medium uppercase tracking-[0.08em] text-black placeholder:text-black/35 outline-none transition-all focus:border-black/18 focus:bg-white" />
+
+                <motion.button
+                  whileHover={{ x: 6 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="mt-2 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.14em]"
+                >
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-black text-white shadow-[0_8px_20px_rgba(15,23,42,0.16)]">
+                    <ArrowRight size={12} />
+                  </div>
+                  <span>Let&apos;s talk</span>
+                </motion.button>
+              </form>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </motion.section>
   );
@@ -1122,31 +1312,45 @@ const Awards = () => {
   ];
 
   return (
-    <motion.section className="section-padding bg-white" {...sectionReveal}>
-      <div className="container-wide">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-20 gap-8">
-          <div className="flex items-center gap-8">
+    <motion.section className="section-padding bg-[#f6f4f1]" {...sectionReveal}>
+      <div className="container-wide max-w-[1180px]">
+        <div className="grid items-start gap-12 lg:grid-cols-[220px_1fr] lg:gap-16">
+          <div className="flex flex-col items-start gap-3">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-black/8 text-black/18 lg:mx-0">
+              <Trophy size={20} />
+            </div>
             <img 
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" 
               alt="Award" 
-              className="w-32 h-40 rounded-3xl object-cover"
+              className="h-40 w-[9.5rem] rounded-[1.1rem] object-cover shadow-[0_18px_40px_rgba(15,23,42,0.1)]"
               referrerPolicy="no-referrer"
             />
-            <h2 className="text-4xl md:text-6xl font-medium max-w-md">Driven by passion and</h2>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-black/55">Get rewards</p>
           </div>
-          <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-black rounded-full border-t-transparent animate-spin" />
-          </div>
-        </div>
 
-        <div className="space-y-0">
-          {awards.map((award, i) => (
-            <div key={i} className="group border-b border-accent py-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:bg-accent/10 transition-colors px-4 rounded-xl">
-              <h4 className="text-lg font-bold uppercase tracking-widest">{award.title}</h4>
-              <span className="text-secondary uppercase text-xs font-bold">{award.org}</span>
-              <span className="text-secondary font-medium">{award.year}</span>
+          <div>
+            <h2 className="max-w-[11.5ch] text-[2.2rem] font-medium leading-[1.05] tracking-[-0.05em] text-black md:text-[3.2rem]">
+              Driven by passion and grounded in expertise, our team turns bold ideas into reality, leading the way in creative innovation.
+            </h2>
+
+            <div className="mt-10 overflow-hidden rounded-[1.2rem] border border-black/6 bg-white/70 backdrop-blur-sm">
+              {awards.map((award, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.28 }}
+                  className="group relative grid grid-cols-[1.5fr_0.9fr_0.45fr] items-center gap-4 border-b border-black/6 px-5 py-5 last:border-b-0"
+                >
+                  <div className="absolute inset-y-0 left-0 w-full bg-[#f2f0ed] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="absolute right-20 top-1/2 hidden h-8 w-8 -translate-y-1/2 rounded-full bg-black/20 opacity-0 blur-[1px] transition-all duration-300 group-hover:opacity-100 md:block" />
+
+                  <h4 className="relative z-10 text-[10px] font-semibold uppercase tracking-[0.12em] text-black">{award.title}</h4>
+                  <span className="relative z-10 text-[10px] font-medium uppercase tracking-[0.1em] text-black/38">{award.org}</span>
+                  <span className="relative z-10 justify-self-end text-[10px] font-medium text-black/38">{award.year}</span>
+                </motion.div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </motion.section>
@@ -1155,43 +1359,101 @@ const Awards = () => {
 
 const Team = () => {
   const members = [
-    { name: 'Nicolas K. Ellington', role: 'Founder', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop' },
-    { name: 'Carlos E. Ashcroft', role: 'Founder', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop' },
+    { name: 'Nicolas K. Ellington', role: 'CEO', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop' },
+    { name: 'Carlos E. Ashcroft', role: 'Founder', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop' },
     { name: 'Leonardo F. Ashton', role: 'UX Designer', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop' },
     { name: 'Ricardo P. Winslow', role: 'UI Designer', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop' },
   ];
 
   return (
-    <motion.section className="section-padding bg-accent/20" {...sectionReveal}>
-      <div className="container-wide">
-        <div className="mb-16">
-          <p className="text-xs uppercase tracking-widest text-secondary mb-4">Our Avengers</p>
-          <h2 className="text-4xl md:text-6xl font-medium mb-8">Meet with our team</h2>
-          <div className="flex gap-8 border-b border-accent pb-8">
-            <button className="font-bold text-sm border-b-2 border-black pb-8 -mb-8">DESIGN TEAM</button>
-            <button className="font-bold text-sm text-secondary">DEVELOPMENT TEAM</button>
-          </div>
-        </div>
+    <motion.section className="section-padding bg-[#f4f2ef]" {...sectionReveal}>
+      <div className="container-wide max-w-[1220px]">
+        <div className="rounded-[1.8rem] bg-white p-5 shadow-[0_30px_70px_rgba(15,23,42,0.08)] md:p-6">
+          <div className="grid gap-5 lg:grid-cols-[1.02fr_0.98fr]">
+            <div className="flex flex-col justify-between rounded-[1.35rem] bg-white p-4 md:p-5">
+              <div>
+                <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/55">Our Avengers</p>
+                <h2 className="max-w-[8ch] text-[2rem] font-medium leading-[1.02] tracking-[-0.05em] text-black md:text-[2.85rem]">
+                  Meet with our team member
+                </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {members.map((m, i) => (
-            <div key={i} className="group">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-3xl mb-6">
-                <img 
-                  src={m.img} 
-                  alt={m.name} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                <div className="mt-7 flex gap-5 border-b border-black/8 pb-4">
+                  <button className="border-b border-black pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-black">
+                    Design team
+                  </button>
+                  <button className="pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-black/30">
+                    Development team
+                  </button>
+                </div>
+
+                <p className="mt-5 max-w-[34ch] text-[13px] leading-6 text-black/62">
+                  What began over coffee-fueled brainstorming sessions has grown into a thriving digital agency dedicated to helping brands stand out.
+                </p>
+
+                <motion.button
+                  whileHover={{ x: 6 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="mt-7 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-black"
+                >
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-white">
+                    <ArrowRight size={12} />
+                  </span>
+                  Join with us
+                </motion.button>
+              </div>
+
+              <motion.div
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.35 }}
+                className="group relative mt-9 overflow-hidden rounded-[1.15rem]"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop"
+                  alt="Team group"
+                  className="h-[14.75rem] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute bottom-6 left-6 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[10px] font-bold uppercase">X</div>
-                  <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[10px] font-bold uppercase">In</div>
-                </div>
-              </div>
-              <h4 className="font-bold">{m.name}</h4>
-              <p className="text-xs text-secondary uppercase tracking-widest mt-1">{m.role}</p>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </motion.div>
             </div>
-          ))}
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {members.map((m, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="group rounded-[1.05rem] bg-[#f5f3f0] p-2.5 shadow-[0_18px_45px_rgba(15,23,42,0.04)]"
+                >
+                  <div className="relative overflow-hidden rounded-[0.95rem] bg-[#dcc195]">
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      className="h-[10.7rem] w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  </div>
+
+                  <div className="px-2 pb-2 pt-3.5">
+                    <h4 className="text-[13px] font-semibold tracking-[-0.03em] text-black">{m.name}</h4>
+                    <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.12em] text-black/42">{m.role}</p>
+
+                    <div className="mt-4 flex gap-2">
+                      {['f', 'x', 'in'].map((social) => (
+                        <span
+                          key={social}
+                          className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold uppercase text-black shadow-sm transition-transform duration-300 group-hover:-translate-y-0.5"
+                        >
+                          {social}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </motion.section>
@@ -1416,3 +1678,5 @@ export default function App() {
     </div>
   );
 }
+
+
