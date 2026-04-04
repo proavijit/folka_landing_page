@@ -68,33 +68,41 @@ const Navbar = () => {
 
   return (
     <nav className={cn(
-      "fixed top-0 left-0 w-full z-50 transition-all duration-500 px-6 py-4",
-      isScrolled ? "bg-white/90 backdrop-blur-xl py-3 shadow-sm border-b border-black/5" : "bg-transparent"
+      "fixed inset-x-0 top-0 z-50 px-4 pt-4 transition-all duration-500 md:px-6",
+      isScrolled ? "pt-3" : "pt-4"
     )}>
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div
+        className={cn(
+          "mx-auto flex max-w-[1680px] items-center justify-between rounded-full border px-5 py-3 transition-all duration-500 md:px-8",
+          isScrolled
+            ? "border-black/10 bg-white/92 shadow-lg backdrop-blur-xl"
+            : "border-white/50 bg-white/88 shadow-[0_10px_40px_rgba(15,23,42,0.08)] backdrop-blur-xl"
+        )}
+      >
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2 cursor-pointer"
+          className="flex cursor-pointer items-center gap-3"
           onClick={() => scrollTo('home')}
         >
-          <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center overflow-hidden group">
-            <motion.div 
-              animate={{ rotate: isScrolled ? 360 : 0 }}
-              transition={{ duration: 1, ease: "easeInOut" }}
-              className="w-5 h-5 bg-white rounded-sm rotate-45 group-hover:scale-125 transition-transform" 
-            />
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-black text-white shadow-sm">
+            <div className="grid grid-cols-2 gap-0.5">
+              <span className="h-1.5 w-1.5 rounded-[2px] bg-white" />
+              <span className="h-1.5 w-3 rounded-[2px] bg-white" />
+              <span className="h-3 w-1.5 rounded-[2px] bg-white" />
+              <span className="h-1.5 w-1.5 rounded-[2px] bg-white" />
+            </div>
           </div>
-          <span className="font-display font-bold text-2xl tracking-tighter">Floka</span>
+          <span className="font-display text-2xl font-bold tracking-tighter text-black">Floka</span>
         </motion.div>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => (
             <button 
               key={link.id} 
               onClick={() => scrollTo(link.id)}
               className={cn(
-                "text-xs font-bold uppercase tracking-widest transition-all relative py-2",
+                "relative py-2 text-sm font-semibold transition-all",
                 activeSection === link.id ? "text-black" : "text-secondary hover:text-black"
               )}
             >
@@ -102,21 +110,32 @@ const Navbar = () => {
               {activeSection === link.id && (
                 <motion.div 
                   layoutId="activeNav"
-                  className="absolute bottom-0 left-0 w-full h-0.5 bg-black"
+                  className="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-black"
                 />
               )}
             </button>
           ))}
-          <a 
-            href="mailto:info@floka.com" 
-            className="text-xs font-bold uppercase tracking-widest bg-black text-white px-6 py-3 rounded-full hover:scale-105 hover:shadow-lg transition-all active:scale-95"
+        </div>
+
+        <div className="hidden items-center gap-4 md:flex">
+          <a
+            href="mailto:info@floka.com"
+            className="text-sm font-medium text-black transition-colors hover:text-secondary"
           >
-            Let's Talk
+            info@floka.com
           </a>
+          <button className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-black text-white shadow-sm transition-transform hover:scale-105">
+            <span className="grid grid-cols-2 gap-1">
+              <span className="h-1 w-1 rounded-full bg-white" />
+              <span className="h-1 w-1 rounded-full bg-white" />
+              <span className="h-1 w-1 rounded-full bg-white" />
+              <span className="h-1 w-1 rounded-full bg-white" />
+            </span>
+          </button>
         </div>
 
         <button 
-          className="md:hidden w-10 h-10 flex items-center justify-center bg-black text-white rounded-full"
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-white md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -129,7 +148,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 w-full bg-white shadow-2xl border-t border-black/5 overflow-hidden md:hidden"
+            className="absolute left-4 right-4 top-full mt-3 overflow-hidden rounded-[2rem] border border-black/5 bg-white shadow-2xl md:hidden"
           >
             <div className="flex flex-col p-8 gap-6">
               {navLinks.map((link) => (
@@ -152,6 +171,78 @@ const Navbar = () => {
   );
 };
 
+const sectionViewport = { once: true, margin: '-120px' };
+
+const sectionReveal = {
+  initial: { opacity: 0, y: 56 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+  viewport: sectionViewport,
+};
+
+const staggerGrid = {
+  initial: {},
+  whileInView: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const staggerItem = {
+  initial: { opacity: 0, y: 40, scale: 0.97 },
+  whileInView: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const CountUp = ({
+  to,
+  duration = 1.6,
+  className,
+}: {
+  to: number;
+  duration?: number;
+  className?: string;
+}) => {
+  const [value, setValue] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    let animationFrame = 0;
+    let startTime: number | null = null;
+
+    const updateValue = (timestamp: number) => {
+      if (startTime === null) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+      setValue(Math.round(progress * to));
+
+      if (progress < 1) {
+        animationFrame = window.requestAnimationFrame(updateValue);
+      }
+    };
+
+    animationFrame = window.requestAnimationFrame(updateValue);
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [duration, hasStarted, to]);
+
+  return (
+    <motion.span
+      className={className}
+      onViewportEnter={() => setHasStarted(true)}
+      viewport={{ once: true }}
+    >
+      {value}
+    </motion.span>
+  );
+};
+
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
 
@@ -162,79 +253,105 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden bg-black">
+    <section id="home" className="relative overflow-hidden bg-[#f5f1ea] px-4 pb-6 pt-24 md:px-6 md:pb-8 md:pt-28">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.92),rgba(245,241,234,0.7)_32%,rgba(245,241,234,1)_68%)]" />
       <motion.div 
         style={{ y: scrollY * 0.5 }}
-        className="absolute inset-0"
+        className="absolute inset-x-4 bottom-6 top-24 md:inset-x-6 md:bottom-8 md:top-28"
       >
-        <img 
-          src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2072&auto=format&fit=crop" 
-          alt="Hero" 
-          className="w-full h-full object-cover opacity-50 scale-110"
-          referrerPolicy="no-referrer"
-        />
+        <div className="relative h-full overflow-hidden rounded-[2rem] md:rounded-[2.25rem]">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full scale-110 object-cover"
+            poster="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2000&auto=format&fit=crop"
+          >
+            <source src="https://cdn.coverr.co/videos/coverr-astronaut-working-on-a-laptop-5174/1080p.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,18,0.66)_0%,rgba(4,10,18,0.2)_42%,rgba(4,10,18,0.48)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(116,214,255,0.22),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,170,90,0.28),transparent_26%)]" />
+        </div>
       </motion.div>
 
-      <div className="relative h-full container-wide flex flex-col justify-center px-6">
-        <div className="max-w-5xl">
+      <div className="relative mx-auto flex min-h-[820px] max-w-[1680px] flex-col justify-between overflow-hidden rounded-[2rem] px-7 pb-12 pt-8 md:min-h-[860px] md:px-12 md:pb-16 md:pt-12">
+        <div className="flex justify-end">
+          <div className="hidden rounded-full border border-white/20 bg-white/8 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/70 backdrop-blur-md md:block">
+            Creative studio and motion-first web systems
+          </div>
+        </div>
+
+        <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_360px]">
+          <div className="max-w-5xl">
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="text-white text-[15vw] md:text-[12rem] font-bold leading-[0.8] tracking-tighter mix-blend-difference">
+            <h1 className="text-white text-[22vw] font-bold leading-[0.82] tracking-[-0.08em] sm:text-[18vw] md:text-[9rem] lg:text-[11rem]">
               Floka
             </h1>
-            <div className="flex items-center gap-6 mt-2">
-              <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: 100 }}
-                transition={{ delay: 0.8, duration: 1 }}
-                className="h-1 bg-white/30 hidden md:block"
-              />
-              <span className="text-white/40 text-5xl md:text-9xl font-light italic tracking-tight">Studio</span>
+            <div className="mt-0 md:mt-1">
+              <span className="block pl-[34%] text-5xl font-light leading-none tracking-tight text-white/30 md:text-[5.5rem]">
+                Studio
+              </span>
             </div>
           </motion.div>
-        </div>
-
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8, x: 50 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ delay: 1.2, duration: 0.8, type: "spring" }}
-          className="absolute bottom-20 right-6 md:right-24 glass p-8 rounded-[2.5rem] max-w-sm shadow-2xl border-white/10"
-        >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
-                alt="Head of Idea" 
-                className="w-14 h-14 rounded-full object-cover border-2 border-black/10"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-2 border-white rounded-full" />
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-secondary font-bold">Head of Idea</p>
-              <p className="font-display font-bold text-base">Almond D. Nelsi</p>
-            </div>
-            <motion.button 
-              whileHover={{ rotate: 90 }}
-              className="ml-auto w-10 h-10 bg-black rounded-full flex items-center justify-center text-white"
-            >
-              <Plus size={18} />
-            </motion.button>
           </div>
-          <p className="text-sm text-secondary leading-relaxed font-medium">
-            No cookie-cutter websites. No fluff. Just real tools and systems to help your business and everyone in your brand.
-          </p>
-        </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8, x: 50 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ delay: 1.2, duration: 0.8, type: "spring" }}
+            className="self-end"
+          >
+            <div className="w-full max-w-[420px] rounded-[1.6rem] bg-white p-3 text-black shadow-[0_18px_60px_rgba(15,23,42,0.18)]">
+              <div className="flex items-center gap-4 rounded-[1.25rem] bg-white p-2.5">
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
+                    alt="Head of Idea" 
+                    className="h-28 w-28 rounded-[1rem] object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="flex min-w-0 flex-1 flex-col justify-between self-stretch py-2">
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8b8b8b]">Head of idea</p>
+                    <p className="mt-1 font-display text-[1.75rem] font-bold leading-none tracking-[-0.05em] text-black">
+                      Almond D. Nelsi
+                    </p>
+                  </div>
+                  <div className="mt-5 flex items-center gap-3">
+                    <motion.button 
+                      whileHover={{ rotate: 90 }}
+                      className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-white"
+                    >
+                      <Plus size={18} />
+                    </motion.button>
+                    <a href="#contact" className="text-sm font-semibold uppercase tracking-[0.16em] text-black">
+                      Let&apos;s talk
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p className="mt-5 max-w-[420px] text-[0.95rem] font-semibold leading-8 text-white">
+              No cookie-cutter websites. No fluff.
+            </p>
+            <p className="mt-1 max-w-[420px] text-[0.95rem] leading-8 text-white/58">
+              Just real tools and smart strategies to grow your business and elevate your brand.
+            </p>
+          </motion.div>
+        </div>
       </div>
 
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-12 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
       >
         <span className="text-white/30 text-[10px] uppercase tracking-widest font-bold">Scroll</span>
         <div className="w-px h-12 bg-gradient-to-b from-white/50 to-transparent" />
@@ -260,26 +377,181 @@ const SectionHeading = ({ subtitle, title, className }: { subtitle: string, titl
 
 const Intro = () => {
   return (
-    <section id="about" className="section-padding bg-white">
-      <div className="container-wide grid md:grid-cols-2 gap-12 items-center">
-        <div className="flex flex-col gap-6">
-          <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center">
-            <div className="w-6 h-6 bg-white rounded-sm rotate-45" />
+    <motion.section
+      id="about"
+      className="overflow-hidden bg-[#fbfaf8] px-4 py-20 md:px-6 md:py-28"
+      {...sectionReveal}
+    >
+      <div className="mx-auto max-w-[1280px]">
+        <div className="mb-14 grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start lg:gap-16">
+          <div className="max-w-[220px] pt-2">
+            <div className="mb-5 flex flex-col gap-4">
+              <div className="relative flex h-[3.4rem] w-[3.4rem] items-center justify-center rounded-full border border-black/8 bg-white">
+                <div className="absolute inset-[-8px] rounded-full border border-black/5" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-[0.8rem] bg-black text-white">
+                  <div className="grid grid-cols-2 gap-0.5">
+                    <span className="h-1 w-1 rounded-[2px] bg-white" />
+                    <span className="h-1 w-2.5 rounded-[2px] bg-white" />
+                    <span className="h-2.5 w-1 rounded-[2px] bg-white" />
+                    <span className="h-1 w-1 rounded-[2px] bg-white" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p className="max-w-[150px] text-[0.9rem] leading-7 text-secondary">
+                  We design every project with long-term success in mind.
+                </p>
+              </div>
+            </div>
           </div>
-          <p className="text-secondary max-w-sm">
-            We design every project with long-term success in mind.
-          </p>
+
+          <div className="max-w-[720px]">
+            <h2 className="text-[2.2rem] font-medium leading-[1.06] tracking-[-0.055em] text-black md:text-[3.35rem]">
+              Our approach is straightforward,
+              <span className="inline text-black/90"> prioritizing functionality, speed, and </span>
+              <span>clarity for solutions.</span>
+            </h2>
+          </div>
         </div>
-        <div>
-          <h2 className="text-3xl md:text-5xl font-medium leading-tight">
-            Our approach is straightforward—prioritizing functionality, speed, and clarity for solutions.
-          </h2>
+
+        <div className="grid gap-4 lg:grid-cols-[230px_minmax(0,1fr)_230px]">
+          <div className="rounded-[1.9rem] border border-black/6 bg-white p-5 shadow-[0_20px_60px_rgba(15,23,42,0.05)]">
+            <div className="mb-6 flex items-start justify-between gap-3 border-b border-black/8 pb-5">
+              <div>
+                <div className="flex items-start">
+                  <CountUp
+                    to={25}
+                    className="font-display text-[5.5rem] font-bold leading-none tracking-[-0.08em] text-black"
+                  />
+                  <span className="mt-2 text-4xl font-light text-black/12">+</span>
+                </div>
+                <p className="mt-2 text-xs text-secondary">Years of experience</p>
+              </div>
+            </div>
+            <p className="text-[0.95rem] leading-8 text-secondary">
+              Explore how we transform ideas into extraordinary digital experiences.
+            </p>
+            <div className="mt-10">
+              <div className="flex -space-x-3">
+                {[1, 2, 3, 4].map((i) => (
+                  <img
+                    key={i}
+                    src={`https://i.pravatar.cc/120?u=intro-${i}`}
+                    alt="User"
+                    className="h-11 w-11 rounded-full border-2 border-white object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                ))}
+              </div>
+              <p className="mt-4 text-sm font-medium text-black">1200+ happy users review</p>
+            </div>
+          </div>
+
+          <div className="relative overflow-hidden rounded-[1.9rem] bg-[#0b0b0b] shadow-[0_24px_60px_rgba(15,23,42,0.14)] md:min-h-[430px]">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(255,255,255,0.05),transparent_34%)]" />
+            <div className="absolute right-10 top-9 hidden text-right text-white md:block">
+              <div className="space-y-7">
+                <div className="leading-none">
+                  <p className="text-[1.15rem] font-bold uppercase tracking-[-0.03em]">ULTRA</p>
+                  <p className="mt-1 text-[0.42rem] font-semibold uppercase tracking-[0.18em] text-white/80">
+                    Prestigious
+                  </p>
+                  <p className="mt-0.5 text-[0.42rem] font-semibold uppercase tracking-[0.18em] text-white/80">
+                    Winner
+                  </p>
+                </div>
+                <div className="leading-none">
+                  <p className="text-[1.15rem] font-bold uppercase tracking-[-0.03em]">HYPER</p>
+                  <p className="mt-1 text-[0.42rem] font-semibold uppercase tracking-[0.18em] text-white/80">
+                    Best award
+                  </p>
+                  <p className="mt-0.5 text-[0.42rem] font-semibold uppercase tracking-[0.18em] text-white/80">
+                    Winner
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 top-0 flex w-[63%] items-end justify-start overflow-hidden">
+              <img
+                src="/home1-author-img1.webp"
+                alt="Floka featured author"
+                className="h-[103%] w-auto max-w-none object-contain object-bottom"
+              />
+            </div>
+            <div className="relative z-10 flex min-h-[430px] flex-col justify-end px-10 pb-9">
+              <p className="max-w-[610px] text-[1.25rem] font-medium leading-[1.38] tracking-[-0.04em] text-white md:text-[1.55rem]">
+                &ldquo;At Floka, we merge strategy, creativity, and technology to shape brands that people love.&rdquo;
+              </p>
+              <p className="mt-5 text-[0.95rem] font-semibold text-white">
+                Merizo H. Yelso <span className="font-normal text-white/42">/CEO</span>
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="rounded-[1.9rem] border border-black/6 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)]">
+              <p className="text-sm text-secondary">Follow us</p>
+              <p className="mt-2 text-[1.85rem] font-medium leading-tight tracking-[-0.05em] text-black">
+                For check updates
+              </p>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {['DRIBBBLE', 'BEHANCE', 'LINKEDIN', 'X', 'XING'].map((social) => (
+                  <a
+                    key={social}
+                    href="#"
+                    className="rounded-full border border-black/10 px-4 py-2 text-xs font-medium tracking-[0.04em] text-black transition-colors hover:bg-black hover:text-white"
+                  >
+                    {social}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[1.9rem] border border-black/6 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.05)]">
+              <p className="text-sm text-secondary">Impressions</p>
+              <div className="mt-8 space-y-3">
+                {[
+                  { name: 'Solutions', value: 100, shell: 'bg-[#f3f3f1]', fill: 'bg-[#ededeb] text-black' },
+                  { name: 'UI/UX', value: 90, shell: 'bg-[#f3f3f1]', fill: 'bg-black text-white' },
+                  { name: 'Explore', value: 72, shell: 'bg-white border border-black/10', fill: 'bg-white text-black' },
+                ].map((stat) => (
+                  <div key={stat.name} className="rounded-[0.8rem]">
+                    <div className={cn("h-8 overflow-hidden rounded-[0.7rem]", stat.shell)}>
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${stat.value}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.15 }}
+                        className={cn(
+                          "flex h-full items-center justify-between rounded-[0.7rem] px-3 text-[0.72rem] font-medium",
+                          stat.fill
+                        )}
+                      >
+                        <span>{stat.name}</span>
+                        <span>{stat.value}%</span>
+                      </motion.div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative mt-20 overflow-hidden py-8">
+          <div className="animate-marquee-right whitespace-nowrap text-[4.5rem] font-medium leading-none tracking-[-0.08em] text-black/18 blur-[0.5px] md:text-[7rem] lg:text-[8rem]">
+            <span className="mr-10">
+              Our team combines creativity, technology, and clarity for modern digital solutions.
+            </span>
+            <span className="mr-10">
+              Our team combines creativity, technology, and clarity for modern digital solutions.
+            </span>
+          </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
-
 const About = () => {
   return (
     <section className="section-padding bg-accent/30">
@@ -372,62 +644,89 @@ const Portfolio = () => {
     { title: 'Digital Solutions', category: 'Web Design', year: '2025', img: 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1964&auto=format&fit=crop' },
     { title: 'Creative Agency', category: 'Marketing', year: '2025', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop' },
     { title: 'Mobile App', category: 'App Design', year: '2025', img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop' },
+    { title: 'Vision Product', category: 'Product Design', year: '2025', img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop' },
   ];
 
   return (
-    <section id="portfolio" className="section-padding bg-white overflow-hidden">
+    <motion.section id="portfolio" className="section-padding bg-white overflow-hidden" {...sectionReveal}>
       <div className="container-wide">
         <SectionHeading 
           subtitle="Portfolio" 
           title="Strategy to build powerful digital solutions" 
         />
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <motion.div
+          className="grid gap-8 md:grid-cols-2"
+          variants={staggerGrid}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {projects.map((project, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, scale: 0.9, y: 50 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group cursor-pointer"
+              variants={staggerItem}
+              whileHover={{ y: -8 }}
+              className={cn(
+                "group cursor-pointer",
+                i === 2 ? "md:col-span-2 md:w-full" : ""
+              )}
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] mb-8 shadow-xl group-hover:shadow-2xl transition-all duration-500">
+              <motion.div
+                className="relative mb-3 aspect-[4/3] overflow-hidden rounded-[10px] bg-black shadow-[0_18px_50px_rgba(15,23,42,0.1)] transition-all duration-500 group-hover:shadow-[0_26px_70px_rgba(15,23,42,0.16)]"
+                transition={{ duration: 0.35, ease: "easeOut" }}
+              >
                 <img 
                   src={project.img} 
                   alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                  <motion.div 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-xl"
-                  >
-                    <ArrowRight className="-rotate-45" />
-                  </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/18 via-transparent to-black/10 opacity-70 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute left-4 top-4 rounded-full bg-white/10 px-3 py-1.5 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
+                  Logoipsum
                 </div>
-                <div className="absolute top-8 left-8 glass px-5 py-2.5 rounded-full text-black text-[10px] font-bold uppercase tracking-widest border-white/20">
-                  {project.category}
-                </div>
-              </div>
-              <div className="flex justify-between items-end px-4">
-                <div>
-                  <h4 className="text-2xl font-bold mb-1">{project.title}</h4>
-                  <p className="text-secondary text-sm font-medium">Case Study — {project.year}</p>
-                </div>
-                <div className="w-12 h-12 border border-black/10 rounded-full flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-300">
-                  <Plus size={20} />
-                </div>
-              </div>
+                <motion.div
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.96 }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.35, delay: 0.15 }}
+                  className="absolute right-4 top-4 flex h-14 w-14 items-center justify-center rounded-full bg-white text-black opacity-0 shadow-[0_12px_32px_rgba(255,255,255,0.18)] transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0"
+                >
+                  <ArrowRight className="-rotate-45" size={20} />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: 0.2 }}
+                  className="absolute bottom-4 left-4 text-[0.72rem] font-semibold uppercase tracking-[0.06em] text-white"
+                >
+                  Branding, module, product, ux
+                </motion.div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.18 }}
+                className="flex items-center justify-between rounded-[10px] bg-white px-5 py-4 shadow-[0_10px_24px_rgba(15,23,42,0.04)]"
+              >
+                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-black">
+                  {project.title}
+                </p>
+                <p className="text-xs font-medium text-secondary">{project.year}</p>
+              </motion.div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mt-20 flex justify-center"
         >
           <button className="group flex items-center gap-6 bg-accent/50 hover:bg-black hover:text-white px-10 py-6 rounded-full transition-all duration-500 hover:scale-105 active:scale-95 shadow-lg hover:shadow-black/20">
@@ -438,12 +737,12 @@ const Portfolio = () => {
           </button>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 const Expertise = () => {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(-1);
 
   const items = [
     { title: 'User Interface & Experience Design', content: 'We create intuitive and engaging interfaces that provide a seamless user experience.' },
@@ -452,10 +751,22 @@ const Expertise = () => {
     { title: 'Low-Code Development', content: 'Rapidly deploy solutions with our expert low-code development services.' },
   ];
 
+  const praise = [
+    { name: 'Avery', quote: '10/10 well recommended', avatar: 'https://i.pravatar.cc/80?u=exp-1' },
+    { name: 'Nina', quote: 'Super speedy website designer', avatar: 'https://i.pravatar.cc/80?u=exp-2' },
+    { name: 'Leo', quote: 'Great in UI/UX', avatar: 'https://i.pravatar.cc/80?u=exp-3' },
+    { name: 'Mia', quote: 'Best design communicator', avatar: 'https://i.pravatar.cc/80?u=exp-4' },
+    { name: 'Owen', quote: 'Sharp and reliable execution', avatar: 'https://i.pravatar.cc/80?u=exp-5' },
+  ];
+
   return (
-    <section id="expertise" className="section-padding bg-black text-white overflow-hidden">
-      <div className="container-wide">
-        <div className="text-center mb-20">
+    <motion.section
+      id="expertise"
+      className="relative bg-black bg-fixed text-white overflow-hidden"
+      {...sectionReveal}
+    >
+      <div className="container-wide relative w-full px-6 py-20 md:px-12 md:py-24 lg:px-24">
+        <div className="text-center mb-20 md:mb-24">
           <motion.h2 
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 0.2, scale: 1 }}
@@ -476,15 +787,17 @@ const Expertise = () => {
           </motion.h3>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-4">
+        <div className="mx-auto max-w-5xl space-y-0">
           {items.map((item, i) => (
-            <div key={i} className="border-b border-white/10 pb-4">
+            <div key={i} className="border-b border-white/10">
               <button 
-                className="w-full flex justify-between items-center py-6 text-left"
+                className="flex w-full items-center gap-6 py-6 text-left md:gap-12"
                 onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
               >
-                <span className="text-xl md:text-2xl font-medium">{item.title}</span>
-                {openIndex === i ? <Minus /> : <Plus />}
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 text-white/80">
+                  {openIndex === i ? <Minus size={16} /> : <Plus size={16} />}
+                </span>
+                <span className="text-lg md:text-[1.65rem] font-medium">{item.title}</span>
               </button>
               <AnimatePresence>
                 {openIndex === i && (
@@ -492,25 +805,64 @@ const Expertise = () => {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     className="overflow-hidden"
                   >
-                    <p className="text-white/60 pb-6 max-w-2xl">
-                      {item.content}
-                    </p>
+                    <div className="grid gap-8 pb-8 pl-14 md:grid-cols-[minmax(0,1fr)_220px] md:pl-20">
+                      <div>
+                        <p className="max-w-2xl text-white/60">
+                          {item.content}
+                        </p>
+                        <div className="mt-6 flex flex-wrap gap-2">
+                          {['Branding', 'Module', 'Product', 'UX'].map((tag) => (
+                            <span
+                              key={tag}
+                              className="rounded-full bg-white/10 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/90"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="overflow-hidden rounded-[1.2rem] bg-white/4">
+                        <img
+                          src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop"
+                          alt="Expertise preview"
+                          className="h-[170px] w-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
           ))}
         </div>
+
+        <div className="sticky bottom-6 mt-16 overflow-hidden py-4">
+          <div className="animate-marquee-left flex min-w-max items-center gap-14 whitespace-nowrap">
+            {[...praise, ...praise].map((item, index) => (
+              <div key={`${item.name}-${index}`} className="flex items-center gap-3 text-sm text-white/90">
+                <img
+                  src={item.avatar}
+                  alt={item.name}
+                  className="h-9 w-9 rounded-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <span className="font-medium">&ldquo;{item.quote}&rdquo;</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 const FunFacts = () => {
   return (
-    <section className="section-padding bg-white">
+    <motion.section className="section-padding bg-white" {...sectionReveal}>
       <div className="container-wide grid lg:grid-cols-2 gap-20 items-center">
         <div className="relative">
           <div className="grid grid-cols-2 gap-4">
@@ -582,13 +934,13 @@ const FunFacts = () => {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 const Logos = () => {
   return (
-    <section className="py-20 bg-white border-y border-accent">
+    <motion.section className="py-20 bg-white border-y border-accent" {...sectionReveal}>
       <div className="container-wide">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-center opacity-40 grayscale">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
@@ -601,13 +953,13 @@ const Logos = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 const VideoSection = () => {
   return (
-    <section className="relative h-[600px] w-full overflow-hidden">
+    <motion.section className="relative h-[600px] w-full overflow-hidden" {...sectionReveal}>
       <img 
         src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
         alt="Video BG" 
@@ -622,7 +974,7 @@ const VideoSection = () => {
           <span className="text-white font-bold uppercase tracking-widest text-xs">Play Reel</span>
         </button>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
@@ -634,7 +986,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="section-padding bg-accent/10 overflow-hidden">
+    <motion.section className="section-padding bg-accent/10 overflow-hidden" {...sectionReveal}>
       <div className="container-wide">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <SectionHeading 
@@ -674,13 +1026,13 @@ const Testimonials = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 const Contact = () => {
   return (
-    <section id="contact" className="section-padding bg-black text-white overflow-hidden">
+    <motion.section id="contact" className="section-padding bg-black text-white overflow-hidden" {...sectionReveal}>
       <div className="container-wide grid lg:grid-cols-2 gap-20">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -756,7 +1108,7 @@ const Contact = () => {
           </form>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
@@ -770,7 +1122,7 @@ const Awards = () => {
   ];
 
   return (
-    <section className="section-padding bg-white">
+    <motion.section className="section-padding bg-white" {...sectionReveal}>
       <div className="container-wide">
         <div className="flex flex-col md:flex-row justify-between items-center mb-20 gap-8">
           <div className="flex items-center gap-8">
@@ -797,7 +1149,7 @@ const Awards = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
@@ -810,7 +1162,7 @@ const Team = () => {
   ];
 
   return (
-    <section className="section-padding bg-accent/20">
+    <motion.section className="section-padding bg-accent/20" {...sectionReveal}>
       <div className="container-wide">
         <div className="mb-16">
           <p className="text-xs uppercase tracking-widest text-secondary mb-4">Our Avengers</p>
@@ -842,7 +1194,7 @@ const Team = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
@@ -856,7 +1208,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="section-padding bg-white">
+    <motion.section className="section-padding bg-white" {...sectionReveal}>
       <div className="container-wide grid lg:grid-cols-12 gap-20">
         <div className="lg:col-span-4">
           <p className="text-xs uppercase tracking-widest text-secondary mb-4">FAQ & Get Answer</p>
@@ -898,7 +1250,7 @@ const FAQ = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
@@ -910,7 +1262,7 @@ const Blog = () => {
   ];
 
   return (
-    <section className="section-padding bg-accent/10">
+    <motion.section className="section-padding bg-accent/10" {...sectionReveal}>
       <div className="container-wide">
         <div className="text-center mb-20">
           <p className="text-xs uppercase tracking-widest text-secondary mb-4">Insights</p>
@@ -936,13 +1288,13 @@ const Blog = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white pt-32 pb-12 px-6 md:px-12 lg:px-24">
+    <motion.footer className="bg-black text-white pt-32 pb-12 px-6 md:px-12 lg:px-24" {...sectionReveal}>
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-32 relative">
           <h2 className="text-[10vw] font-bold tracking-tighter leading-none opacity-20">Let's</h2>
@@ -1003,7 +1355,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 
@@ -1015,7 +1367,6 @@ export default function App() {
       <Navbar />
       <Hero />
       <Intro />
-      <About />
       <Portfolio />
       <Expertise />
       <FunFacts />
@@ -1044,6 +1395,22 @@ export default function App() {
         }
         .animate-spin-slow {
           animation: spin-slow 10s linear infinite;
+        }
+        @keyframes marquee-right {
+          from { transform: translateX(-45%); }
+          to { transform: translateX(0%); }
+        }
+        .animate-marquee-right {
+          display: inline-block;
+          min-width: max-content;
+          animation: marquee-right 18s linear infinite alternate;
+        }
+        @keyframes marquee-left {
+          from { transform: translateX(0%); }
+          to { transform: translateX(-50%); }
+        }
+        .animate-marquee-left {
+          animation: marquee-left 24s linear infinite;
         }
       `}</style>
     </div>
