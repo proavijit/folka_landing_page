@@ -102,3 +102,14 @@ h1, h2, h3, h4, h5, h6 {
 .animate-marquee-left {
   animation: marquee-left 24s linear infinite;
 }
+
+/* ⚡ Preloader Sweep */
+@keyframes line-sweep {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100vw); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-line-sweep {
+  animation: line-sweep 3s ease-in-out infinite;
+}

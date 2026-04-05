@@ -1,0 +1,26 @@
+Dear Candidates,
+
+I appreciate your interest in the Frontend Developer position at SM Technology. As part of the next step in our hiring process, we would like you to complete a technical task designed to assess your skills and willingness to work with Webflow or WordPress projects.
+
+🔧 Task Details:
+Please replicate the following design using HTML, CSS, and JavaScript (Use any framework and ensure all kinds of animations ):
+
+🔗 Reference Design Link: https://floka.casethemes.net/home-1-onepage/        (Only one page)
+
+Bonus parte: https://bird.marketing/   (Integrate this site banner animation on the above website)
+
+📅 Submission Deadline:
+Date: 6th April 2026
+Time: 2:00 PM (Bangladesh Standard Time)
+
+Please ensure your work is clean, responsive, pixel-perfect, and well-structured. Share the completed task via a GitHub link and a Live link.
+
+Please let us know if you have any questions or require further clarification.
+
+We look forward to seeing your work!
+
+Best regards,
+Billal Hossen
+Operations Manager
+SM Technology
+Phone: 01760884392
