@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Plus } from 'lucide-react';
 import { sectionReveal, staggerGrid, staggerItem } from '@/lib/animations';
-
+import { WordsStagger } from "@/registry/spell-ui/words-stagger";
 const FunFacts = () => {
   return (
     <motion.section className="section-padding bg-[#f5f5f5]" {...sectionReveal}>
@@ -52,7 +52,7 @@ const FunFacts = () => {
               transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-[620px] text-4xl font-medium leading-[1.15] tracking-[-0.05em] text-black md:text-[3.4rem]"
             >
-              Consistently delivering impactful results through a perfect blend of design and functionality.
+              <WordsStagger>Consistently delivering impactful results through a perfect blend of design and functionality.</WordsStagger>
             </motion.h2>
 
             <motion.div

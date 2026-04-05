@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-
+import { WordsStagger } from "@/registry/spell-ui/words-stagger";
 const Intro = () => {
   const animationProps = {
     initial: { opacity: 0, y: 20 },
@@ -42,7 +42,9 @@ const Intro = () => {
 
           <div className="max-w-[850px]">
             <h2 className="text-[2.5rem] font-medium leading-[1.1] tracking-tight text-black md:text-[3.5rem] lg:text-[4rem]">
-              Our approach is straightforward—prioritizing functionality, speed, and clarity for solutions.
+              <WordsStagger>
+                Our approach is straightforward—prioritizing functionality, speed, and clarity for solutions.
+              </WordsStagger>
             </h2>
           </div>
         </div>

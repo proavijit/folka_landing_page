@@ -5,7 +5,7 @@ import { cn } from "@/app/lib/utils";
 
 interface SectionHeadingProps {
   subtitle: string;
-  title: string;
+  title: React.ReactNode;
   className?: string;
 }
 

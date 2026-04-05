@@ -21,9 +21,9 @@ const Preloader = () => {
         <motion.div
           id="preloader"
           initial={{ opacity: 1 }}
-          exit={{ 
+          exit={{
             opacity: 0,
-            transition: { duration: 0.8, ease: "easeInOut" } 
+            transition: { duration: 0.8, ease: "easeInOut" }
           }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black"
         >

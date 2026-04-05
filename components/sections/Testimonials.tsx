@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion'; // Ensure you're using 'framer-motion' or 'motion/react'
 import { sectionReveal } from '@/lib/animations';
 import SectionHeading from '@/components/ui/SectionHeading';
-
+import { WordsStagger } from "@/registry/spell-ui/words-stagger";
 const Testimonials = () => {
   const testimonials = [
     { name: 'Nicolas K. Ellington', role: 'IT Specialist', text: 'As we continued to use their tool and found more use cases, our feature requests quickly found their way into their backlog.', rating: 5 },
@@ -20,18 +20,19 @@ const Testimonials = () => {
           <div className="max-w-2xl">
             <p className="uppercase tracking-widest text-[10px] font-bold mb-4 opacity-50">User Feedbacks</p>
             <h2 className="text-4xl md:text-5xl font-medium leading-[1.1] tracking-tight">
-              Accelerating growth, and unlocking new potential.
-              <span className="inline-flex items-center mx-2 -space-x-2">
-                {[1, 2, 3].map((i) => (
-                  <img
-                    key={i}
-                    src={`https://i.pravatar.cc/150?u=${i + 20}`}
-                    className="h-8 w-8 rounded-full border-2 border-white object-cover"
-                    alt="user"
-                  />
-                ))}
-              </span>
-              Let's build your brand—together.
+              <WordsStagger>
+                Accelerating growth, and unlocking new potential.
+                <span className="inline-flex items-center mx-2 -space-x-2">
+                  {[1, 2, 3].map((i) => (
+                    <img
+                      key={i}
+                      src={`https://i.pravatar.cc/150?u=${i + 20}`}
+                      className="h-8 w-8 rounded-full border-2 border-white object-cover"
+                      alt="user"
+                    />
+                  ))}
+                </span>
+                Let's build your brand—together.</WordsStagger>
             </h2>
           </div>
         </div>

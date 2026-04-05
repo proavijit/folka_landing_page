@@ -6,7 +6,7 @@ import { ArrowRight, Plus } from 'lucide-react';
 import { cn } from '@/app/lib/utils';
 import { sectionReveal, staggerGrid, staggerItem } from '@/lib/animations';
 import SectionHeading from '@/components/ui/SectionHeading';
-
+import { WordsStagger } from "@/registry/spell-ui/words-stagger";
 const Portfolio = () => {
   const projects = [
     { title: 'Aldan Branding', category: 'Branding', year: '2025', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop' },
@@ -17,8 +17,8 @@ const Portfolio = () => {
   ];
 
   return (
-    <motion.section 
-      id="portfolio" 
+    <motion.section
+      id="portfolio"
       variants={sectionReveal}
       initial="initial"
       whileInView="whileInView"
@@ -26,9 +26,9 @@ const Portfolio = () => {
       className="section-padding bg-[#f5f5f5] overflow-hidden"
     >
       <div className="container-wide">
-        <SectionHeading 
-          subtitle="Portfolio" 
-          title="Strategy to build powerful digital solutions" 
+        <SectionHeading
+          subtitle="Portfolio"
+          title={<WordsStagger>Strategy to build powerful digital solutions</WordsStagger>}
         />
 
         <motion.div
@@ -39,7 +39,7 @@ const Portfolio = () => {
           viewport={{ once: true, margin: "-80px" }}
         >
           {projects.map((project, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               variants={staggerItem}
               whileHover={{ y: -8 }}
@@ -52,9 +52,9 @@ const Portfolio = () => {
                 className="relative mb-3 aspect-[4/3] overflow-hidden rounded-[10px] bg-black shadow-[0_18px_50px_rgba(15,23,42,0.1)] transition-all duration-500 group-hover:shadow-[0_26px_70px_rgba(15,23,42,0.16)]"
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
-                <img 
-                   src={project.img} 
-                  alt={project.title} 
+                <img
+                  src={project.img}
+                  alt={project.title}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                   referrerPolicy="no-referrer"
                 />
@@ -99,7 +99,7 @@ const Portfolio = () => {
           ))}
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
