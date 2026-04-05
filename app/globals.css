@@ -72,3 +72,33 @@ h1, h2, h3, h4, h5, h6 {
     padding-inline: 6rem;
   }
 }
+
+/* 🔥 Custom Animations */
+@keyframes spin-slow {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-45%); }
+  to { transform: translateX(0%); }
+}
+
+.animate-marquee-right {
+  display: inline-block;
+  min-width: max-content;
+  animation: marquee-right 18s linear infinite alternate;
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0%); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 24s linear infinite;
+}
